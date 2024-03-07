@@ -5,6 +5,9 @@ This module contains the pascal triangle
 
 
 def pascal_triangle(n):
+    '''
+    This method is the implemetation
+    '''
     greaterList = []
     if (n <= 0):
         return greaterList
