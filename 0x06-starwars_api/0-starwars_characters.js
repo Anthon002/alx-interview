@@ -1,14 +1,14 @@
 #!/usr/bin/node
 const request = require('request');
-const URL_API = 'https://swapi-api.hbtn.io/api';
+const API_URL = 'https://swapi-api.hbtn.io/api';
 
 if (process.argv.length > 2) {
-  request(`${URL_API}/films/${process.argv[2]}/`, (err, _, body) => {
+  request(`${API_URL}/films/${process.argv[2]}/`, (err, _, body) => {
     if (err) {
       console.log(err);
     }
-    const charURL = JSON.parse(body).characters;
-    const charName = charURL.map(
+    const charactersURL = JSON.parse(body).characters;
+    const charactersName = charactersURL.map(
       url => new Promise((resolve, reject) => {
         request(url, (promiseErr, __, charactersReqBody) => {
           if (promiseErr) {
@@ -18,7 +18,7 @@ if (process.argv.length > 2) {
         });
       }));
 
-    Promise.all(charName)
+    Promise.all(charactersName)
       .then(names => console.log(names.join('\n')))
       .catch(allErr => console.log(allErr));
   });
