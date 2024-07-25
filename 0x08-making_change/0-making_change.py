@@ -1,24 +1,25 @@
 #!/usr/bin/python3
-"""Currency exchange module.
+"""Change making module.
 """
 
-def exchangeCurrency(denominations, amount):
-    """Determines the fewest number of currency units needed to meet a given
-    amount when given a collection of different denomination values.
+
+def makeChange(coins, total):
+    """Determines the fewest number of coins needed to meet a given
+    amount total when given a pile of coins of different values.
     """
-    if amount <= 0:
+    if total <= 0:
         return 0
-    remaining = amount
-    units_count = 0
-    denom_idx = 0
-    sorted_denominations = sorted(denominations, reverse=True)
-    num_denoms = len(denominations)
-    while remaining > 0:
-        if denom_idx >= num_denoms:
+    rem = total
+    coins_count = 0
+    coin_idx = 0
+    sorted_coins = sorted(coins, reverse=True)
+    n = len(coins)
+    while rem > 0:
+        if coin_idx >= n:
             return -1
-        if remaining - sorted_denominations[denom_idx] >= 0:
-            remaining -= sorted_denominations[denom_idx]
-            units_count += 1
+        if rem - sorted_coins[coin_idx] >= 0:
+            rem -= sorted_coins[coin_idx]
+            coins_count += 1
         else:
-            denom_idx += 1
-    return units_count
+            coin_idx += 1
+    return coins_count
